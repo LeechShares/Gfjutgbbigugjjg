@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OctoBotv3 - Multi</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+  /* Custom styles can be added here */
+body {
+  padding: 20px;
+  animation: rainbow 10s linear infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-color: #ff0000; /* Red */
+  }
+  16.67% {
+    background-color: #ff7f00; /* Orange */
+  }
+  33.33% {
+    background-color: #ffff00; /* Yellow */
+  }
+  50% {
+    background-color: #00ff00; /* Green */
+  }
+  66.67% {
+    background-color: #0000ff; /* Blue */
+  }
+  83.33% {
+    background-color: #4b0082; /* Indigo */
+  }
+  100% {
+    background-color: #9400d3; /* Violet */
+  }
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+/* Navigation Bar Animation */
+.navbar {
+  animation: slideDown 1s ease-out;
+  border-radius: 20px;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+} 
+@keyframes running-color {
+    0% {
+        color: orange;
+    }
+    25% {
+        color: green;
+    }
+    50% {
+        color: blue;
+    }
+    75% {
+        color: purple;
+    }
+    100% {
+        color: orange;
+    }
+}
+
+#running-text {
+    animation: running-color 5s infinite; /* Change the duration (5s) as per your preference */
+}
+ .step {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" id="running-text" href="/">OctoBotv3 - Multi</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#myAbout" >About</a>
+        </li>
+           <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#myGuide" >Guide</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.facebook.com/OctoBotV3Official ">Contact Developer</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link"><p id="running-text">Version 3.0</p></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container">
+    <h1 class="mt-5" id="running-text">🐙OCTOBOTV3</h1>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Upload Cookies From Url</h5>
+        <form id="addForm">
+          <div class="form-group">
+            <label for="url">Pastebin or Github Raw Url:</label>
+            <input type="url" id="url" name="url" class="form-control" required placeholder= "https://pastebin.com/raw/hdjEhhz">
+          </div>
+          <button type="submit" class="btn btn-primary">Add URL</button>
+        </form>
+        <p style="color:red">****<strong>NOTE:</strong> read guide how to </p>
+      </div>
+    </div>
+
+    <!--
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Delete Cookie URL</h5>
+        <ul id="urlsList" class="list-group"></ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">All Cookie URLs</h5>
+        <button id="getAllUrls" class="btn btn-info">Get All URLs</button>
+        <ul id="allUrlsList" class="list-group mt-3"></ul>
+      </div>
+    </div>
+
+  </div>
+
+-->
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Success</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="successModalBody">
+            Action completed successfully.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="errorModalBody">
+            Action failed. Please try again later.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+<div class="modal fade" id="myAbout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    <!-- Modal Content -->
+    <p>Tagalogin ko nalang ang bot nato ay hindi autobot eto ay singit only sa project ko ang <i id="running-text" style="color:orange">OctoBotv3 - MultiState</i> for now you can't choose commands events or etc also cant perform certain commands of the bot like shells and other </p>
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- Additional buttons or actions -->
+      </div>
+    </div>
+  </div>
+</div> 
+<!--new-->
+<div class="modal fade" id="myGuide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Guide</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Modal Content -->
+        <div class="step">
+       
+        <p>How to use our <i id="running-text">OctoBotv3</i></p>
+        <ol>
+            <li>Get Your appstate using c3c fbstate kiwi browser extension</li>
+            <li>Copy your fbstate and upload to github or pastebin as public</li>
+            <li>get the raw link</li>
+             <li>upload url in this web and wait a couple of minutes </li>
+              <li>contact developer to make it fast</li>
+        </ol>
+        <p>**Pm nyu ko  kung may katanungans</p>
+    </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- Additional buttons or actions -->
+      </div>
+    </div>
+  </div>
+</div>  
+  
+<script>
+$(document).ready(function(){
+  const addForm = document.getElementById('addForm');
+  const urlInput = document.getElementById('url');
+  const allUrlsList = document.getElementById('allUrlsList');
+  const getAllUrlsBtn = document.getElementById('getAllUrls');
+
+  addForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const url = urlInput.value.trim();
+    if (url) {
+      addUrl(url);
+      urlInput.value = '';
+    } else {
+      showErrorModal('Please enter a valid URL');
+    }
+  });
+
+  getAllUrlsBtn.addEventListener('click', () => {
+    getAllUrls();
+  });
+
+  function addUrl(url) {
+    fetch('/cookieUrl', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ url })
+    })
+    .then(response => {
+      if (response.ok) {
+        $('#successModalBody').text('URL added successfully');
+        $('#successModal').modal('show');
+        getAllUrls();
+      } else {
+        throw new Error('Failed to add URL');
+      }
+    })
+    .catch(error => {
+      console.error('Error adding URL:', error);
+      showErrorModal('Failed to add URL');
+    });
+  }
+
+  function getAllUrls() {
+    fetch('/cookieUrls')
+    .then(response => response.json())
+    .then(data => {
+      allUrlsList.innerHTML = '';
+      data.forEach((url, index) => {
+        const li = document.createElement('li');
+        li.textContent = url;
+        allUrlsList.appendChild(li);
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', () => {
+          deleteUrl(index);
+        });
+        li.appendChild(deleteBtn);
+      });
+    })
+    .catch(error => {
+      console.error('Error getting URLs:', error);
+      showErrorModal('Failed to get URLs');
+    });
+  }
+
+  function deleteUrl(index) {
+    fetch(`/cookieUrl/${index}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        $('#successModalBody').text('URL deleted successfully');
+        $('#successModal').modal('show');
+        getAllUrls();
+      } else {
+        throw new Error('Failed to delete URL');
+      }
+    })
+    .catch(error => {
+      console.error('Error deleting URL:', error);
+      showErrorModal('Failed to delete URL');
+    });
+  }
+
+  function showErrorModal(message) {
+    $('#errorModalBody').text(message);
+    $('#errorModal').modal('show');
+  }
+}); 
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
